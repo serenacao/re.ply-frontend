@@ -1,4 +1,4 @@
-import type { Job, ApiResponse } from '../types/jobTracker'
+import type { Job, ApiResponse, AddJobRequest, AddJobResponse, RemoveJobResponse, UpdateJobResponse, GetJobsResponse, RemoveJobRequest, UpdateJobRequest, GetJobsRequest } from '../types/jobTracker'
 // src/api/jobTracker.ts
 const API_BASE_URL = 'http://localhost:8000'
 
@@ -21,20 +21,20 @@ class JobTrackerApi {
     }
   }
 
-  addJob(job: Job) {
-    return this.makeRequest('/api/JobTracker/add', job)
+  addJob(request: AddJobRequest): Promise<ApiResponse<AddJobResponse>> {
+    return this.makeRequest('/api/JobTracker/add', request)
   }
 
-  removeJob(user: string, job: Job) {
-    return this.makeRequest('/api/JobTracker/remove', { user, job })
+  removeJob(request: RemoveJobRequest): Promise<ApiResponse<RemoveJobResponse>> {
+    return this.makeRequest('/api/JobTracker/remove', request)
   }
 
-  updateJob(job: Job) {
-    return this.makeRequest('/api/JobTracker/update', job)
+  updateJob(request: UpdateJobRequest): Promise<ApiResponse<UpdateJobResponse>> {
+    return this.makeRequest('/api/JobTracker/update', request)
   }
 
-  getJobs(user: string) {
-    return this.makeRequest('/api/JobTracker/getJobs', { user })
+  getJobs(request: GetJobsRequest): Promise<ApiResponse<GetJobsResponse>> {
+    return this.makeRequest('/api/JobTracker/getJobs', request)
   }
 }
 

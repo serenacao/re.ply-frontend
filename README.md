@@ -2,6 +2,14 @@
 
 A modern Vue.js frontend application built with Vue 3, TypeScript, and Vite.
 
+## User Journey
+
+A user wants to track a job that they recently applied for that is still pending (they are still in the process of interviewing).
+
+The user opens the application and logs in with their username and password.
+
+The user navigates to the job tracker, and inputs the job that they want to track. The user adds it to their list of jobs.
+
 ## Features
 
 - **Vue 3** - Latest version of Vue.js with Composition API
@@ -52,3 +60,6 @@ src/
 - [TypeScript with Vue](https://vuejs.org/guide/typescript/overview.html)
 - [Vue Router](https://router.vuejs.org/)
 - [Pinia](https://pinia.vuejs.org/)
+
+
+

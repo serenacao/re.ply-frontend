@@ -11,6 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
   // Computed properties
   const isAuthenticated = computed(() => user.value !== null)
   const currentUsername = computed(() => user.value?.username || '')
+  const currentId = computed(() => user.value?._id || '')
 
   // Load user from localStorage on initialization
   const initializeAuth = () => {
@@ -41,6 +42,7 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
 
     const response = await authApi.register(credentials)
+    console.log('authApi response:', response.data)
 
     if (response.error) {
       error.value = response.error
@@ -48,11 +50,11 @@ export const useAuthStore = defineStore('auth', () => {
       return false
     }
 
-    // Handle both string and User object responses
+   
     const userResponse = response.data?.user
-    const userData: User = typeof userResponse === 'string' 
-      ? { username: userResponse, id: userResponse }
-      : userResponse || { username: credentials.username, id: credentials.username }
+    const userData: User = userResponse ? 
+    { username: userResponse.username, _id: userResponse._id, password: userResponse.password } : 
+    {username: '', _id: '', password: ''}
     user.value = userData
     saveToStorage(userData)
     
@@ -66,6 +68,7 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
 
     const response = await authApi.login(credentials)
+    console.log('authApi response:', response.data)
 
     if (response.error) {
       error.value = response.error
@@ -73,11 +76,10 @@ export const useAuthStore = defineStore('auth', () => {
       return false
     }
 
-    // Handle both string and User object responses
     const userResponse = response.data?.user
-    const userData: User = typeof userResponse === 'string' 
-      ? { username: userResponse, id: userResponse }
-      : userResponse || { username: credentials.username, id: credentials.username }
+    const userData: User = userResponse ? 
+    { username: userResponse.username, _id: userResponse._id, password: userResponse.password } : 
+    {username: '', _id: '', password: ''}
     user.value = userData
     saveToStorage(userData)
     
@@ -106,6 +108,7 @@ export const useAuthStore = defineStore('auth', () => {
     // Computed
     isAuthenticated,
     currentUsername,
+    currentId,
     
     // Actions
     register,

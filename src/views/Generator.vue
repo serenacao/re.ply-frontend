@@ -166,7 +166,7 @@ import { useAuthStore } from '../stores/auth'
 import type { File } from '../types/fileStorage'
 
 const authStore = useAuthStore()
-const currentUser = computed(() => authStore.currentUsername)
+const currentUser = computed(() => authStore.currentId)
 const availableFiles = ref<File[]>([])
 const selectedFiles = ref<string[]>([])
 const question = ref('')
@@ -220,6 +220,7 @@ const toggleFileSelection = (fileName: string) => {
 
 const generateDraft = async () => {
   if (!question.value) return
+  console.log('question', question.value);
   if (selectedFiles.value.length === 0) {
     error.value = 'Please select at least one file!'
     return
@@ -232,11 +233,13 @@ const generateDraft = async () => {
   const selectedFilesContent = availableFiles.value.filter(file => 
     selectedFiles.value.includes(file.name)
   )
+  console.log('files', selectedFilesContent)
 
   const response = await generatorApi.generate({
     question: question.value,
     files: selectedFilesContent
   })
+  console.log('response', response);
 
   if (response.error) {
     error.value = response.error

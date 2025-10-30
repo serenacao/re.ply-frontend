@@ -3,7 +3,6 @@
     <div class="auth-container">
       <div class="auth-header">
         <h1>Welcome to re.ply</h1>
-        <p>Sign in to access your files and AI generator</p>
       </div>
 
       <div class="auth-tabs">
@@ -110,12 +109,6 @@
       <div v-if="successMessage" class="success-message">
         <p>{{ successMessage }}</p>
       </div>
-
-      <!-- Demo Users Info -->
-      <div class="demo-info">
-        <h3>Quick Start</h3>
-        <p>Create an account to start using file storage and AI generation features.</p>
-      </div>
     </div>
   </div>
 </template>
@@ -215,7 +208,7 @@ watch(activeTab, () => {
 }
 
 .auth-container {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--antiflash-white) 50%;
   backdrop-filter: blur(10px);
   border-radius: 16px;
   padding: 3rem;
@@ -230,14 +223,13 @@ watch(activeTab, () => {
 }
 
 .auth-header h1 {
-  color: white;
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   font-weight: 600;
+  opacity: 0.85;
 }
 
 .auth-header p {
-  color: rgba(255, 255, 255, 0.8);
   font-size: 1.1rem;
 }
 
@@ -245,8 +237,8 @@ watch(activeTab, () => {
   display: flex;
   margin-bottom: 2rem;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
   padding: 4px;
+  background: var(--cool-gray);
 }
 
 .tab-button {
@@ -254,7 +246,7 @@ watch(activeTab, () => {
   padding: 0.75rem 1rem;
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: --space-cadet;
   font-weight: 500;
   cursor: pointer;
   border-radius: 6px;
@@ -263,11 +255,9 @@ watch(activeTab, () => {
 
 .tab-button.active {
   background: rgba(255, 255, 255, 0.2);
-  color: white;
 }
 
 .tab-button:hover:not(.active) {
-  color: white;
   background: rgba(255, 255, 255, 0.1);
 }
 
@@ -284,7 +274,6 @@ watch(activeTab, () => {
 }
 
 .form-group label {
-  color: white;
   font-weight: 500;
   font-size: 0.9rem;
 }
@@ -294,9 +283,10 @@ watch(activeTab, () => {
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
-  color: white;
   font-size: 1rem;
   transition: border-color 0.2s ease;
+  background-color: var(--tea-green);
+  opacity: 0.5;
 }
 
 .form-input:focus {
@@ -305,13 +295,12 @@ watch(activeTab, () => {
 }
 
 .form-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--cool-gray);;
 }
 
 .auth-button {
   padding: 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #bf5b81ff 0%, #549a72ff 100%);
   border: none;
   border-radius: 8px;
   font-size: 1rem;
@@ -319,11 +308,13 @@ watch(activeTab, () => {
   cursor: pointer;
   transition: all 0.2s ease;
   margin-top: 0.5rem;
+  background-color: var(--tea-green);
 }
 
 .auth-button:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  background-color: var(--tea-green);
 }
 
 .auth-button:disabled {
@@ -331,6 +322,8 @@ watch(activeTab, () => {
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+  color: var(--cool-gray);
+  background-color: var(--tea-green);
 }
 
 .error-message,
@@ -352,7 +345,7 @@ watch(activeTab, () => {
 .success-message {
   background: rgba(34, 197, 94, 0.2);
   border: 1px solid rgba(34, 197, 94, 0.5);
-  color: #86efac;
+  color: #9ad58eff;
 }
 
 .close-error {
@@ -376,13 +369,11 @@ watch(activeTab, () => {
 }
 
 .demo-info h3 {
-  color: white;
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
 }
 
 .demo-info p {
-  color: rgba(255, 255, 255, 0.7);
   font-size: 0.9rem;
   line-height: 1.5;
 }
@@ -390,10 +381,12 @@ watch(activeTab, () => {
 @media (max-width: 480px) {
   .auth {
     padding: 1rem;
+    linear-gradient: (160deg, var(--antiflash-white) 0%, var(--tea-green) 100%);
   }
   
   .auth-container {
     padding: 2rem;
+    box-shadow: 0 8px 24px rgba(43, 45, 66, 0.15);
   }
   
   .auth-header h1 {

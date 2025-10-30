@@ -129,7 +129,7 @@ import { useAuthStore } from '../stores/auth'
 import type { File } from '../types/fileStorage'
 
 const authStore = useAuthStore()
-const currentUser = computed(() => authStore.currentUsername)
+const currentUser = computed(() => authStore.currentId)
 const files = ref<File[]>([])
 const loading = ref(false)
 const error = ref('')

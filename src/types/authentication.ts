@@ -1,6 +1,7 @@
 export interface User {
   username: string
-  id: string // Assuming the backend returns an ID, will adjust based on actual response
+  password: string
+  _id: string // Assuming the backend returns an ID, will adjust based on actual response
 }
 
 export interface RegisterRequest {
@@ -14,11 +15,11 @@ export interface LoginRequest {
 }
 
 export interface RegisterResponse {
-  user: string | User  // Can be string (username) or User object
+  user: User  
 }
 
 export interface LoginResponse {
-  user: string | User  // Can be string (username) or User object
+  user: User 
 }
 
 export interface ApiResponse<T> {

@@ -44,7 +44,7 @@ const handleLogout = () => {
 #app {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--antiflash-white) , var(--tea-green) 100%);
 }
 
 nav {
@@ -55,6 +55,8 @@ nav {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: var(--raspberry-rose);
+  opacity: 0.8;
 }
 
 .nav-brand h2 {
@@ -79,6 +81,9 @@ nav {
 .nav-links a:hover,
 .nav-links a.router-link-active {
   background: rgba(255, 255, 255, 0.2);
+}
+.nav-links a.router-link-exact-active {
+  font-weight: bold;
 }
 
 .user-menu {

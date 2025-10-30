@@ -7,6 +7,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --raspberry-rose: #ED6B86;
+  --space-cadet: #2b2d42ff;
+  --cool-gray: #8d99aeff;
+  --antiflash-white: #edf2f4ff;
+  --tea-green: #deefb7ff;
 }
 
 * {
@@ -17,6 +23,7 @@
 
 body {
   margin: 0;
+  color: var(--space-cadet);
   min-width: 320px;
   min-height: 100vh;
   background: #f8fafc;
