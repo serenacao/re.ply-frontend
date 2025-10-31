@@ -5,6 +5,7 @@ import FileStorage from '../views/FileStorage.vue'
 import Generator from '../views/Generator.vue'
 import Auth from '../views/Auth.vue'
 import JobTracker from '../views/JobTracker.vue'
+import Download from '../views/Download.vue'
 
 const routes = [
   {
@@ -35,6 +36,12 @@ const routes = [
   name: 'JobTracker',
   component: JobTracker,
   meta: { requiresAuth: true }
+  },
+  {
+    path: '/download',
+    name: 'Download',
+    component: Download,
+    meta: { requiresAuth: true }
   }
 ]
 

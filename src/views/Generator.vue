@@ -93,10 +93,9 @@
       <div class="draft-header">
         <h3>Generated Draft</h3>
         <div class="draft-actions">
-          <button @click="acceptDraft" :disabled="accepted" class="accept-btn" v-if="!accepted">
-            {{ accepted ? 'Accepted' : 'Accept Draft' }}
+          <button @click="acceptDraft" class="accept-btn">
+            Accept Draft
           </button>
-          <span v-if="accepted" class="accepted-badge">✓ Accepted</span>
         </div>
       </div>
 
@@ -160,12 +159,14 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
+import {useRouter} from 'vue-router'
 import { fileStorageApi } from '../services/fileStorageApi'
 import { generatorApi } from '../services/generatorApi'
 import { useAuthStore } from '../stores/auth'
 import type { File } from '../types/fileStorage'
 
 const authStore = useAuthStore()
+const router = useRouter()
 const currentUser = computed(() => authStore.currentId)
 const availableFiles = ref<File[]>([])
 const selectedFiles = ref<string[]>([])
@@ -177,7 +178,6 @@ const feedbackHistory = ref<string[]>([])
 const loading = ref(false)
 const error = ref('')
 const success = ref('')
-const accepted = ref(false)
 
 // Watch for draft changes to update editable draft
 watch(draft, (newDraft) => {
@@ -235,10 +235,12 @@ const generateDraft = async () => {
   )
   console.log('files', selectedFilesContent)
 
-  const response = await generatorApi.generate({
-    question: question.value,
-    files: selectedFilesContent
-  })
+  const cleanRequest = JSON.parse(JSON.stringify({
+  question: question.value,
+  files: selectedFilesContent
+  }))
+
+  const response = await generatorApi.generate(cleanRequest)
   console.log('response', response);
 
   if (response.error) {
@@ -248,7 +250,6 @@ const generateDraft = async () => {
     editableDraft.value = draft.value
     success.value = 'Draft generated successfully!'
     feedbackHistory.value = []
-    accepted.value = false
     setTimeout(() => clearSuccess(), 3000)
   }
 
@@ -301,21 +302,39 @@ const submitFeedback = async () => {
 }
 
 const acceptDraft = async () => {
+  if (!draft.value.trim()) {
+    error.value = 'No draft available to accept.'
+    return
+  }
+
   loading.value = true
   error.value = ''
 
-  const response = await generatorApi.accept({})
+  try {
+    success.value = 'Draft accepted successfully!'
 
-  if (response.error) {
-    error.value = response.error
-  } else {
-    accepted.value = true
-    success.value = 'Draft accepted successfully'
-    setTimeout(() => clearSuccess(), 3000)
+    // Navigate to summary page, passing the draft as route state
+    router.push({
+      name: 'Download',
+      state: { draft: draft.value },
+    })
+
+    // Reset generator state
+    question.value = ''
+    draft.value = ''
+    editableDraft.value = ''
+    feedbackComment.value = ''
+    feedbackHistory.value = []
+    selectedFiles.value = []
+  
+  } catch (err) {
+    error.value = 'An error occurred while accepting the draft.'
+    console.error(err)
+  } finally {
+    loading.value = false
   }
-
-  loading.value = false
 }
+
 
 const clearError = () => {
   error.value = ''
@@ -346,13 +365,11 @@ onMounted(() => {
 }
 
 .header h1 {
-  color: white;
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
 .header p {
-  color: rgba(255, 255, 255, 0.8);
   font-size: 1.1rem;
 }
 
@@ -372,7 +389,7 @@ onMounted(() => {
 }
 
 .user-info h3 {
-  color: white;
+
   margin: 0;
   font-size: 1.2rem;
 }
@@ -380,7 +397,7 @@ onMounted(() => {
 .load-btn {
   padding: 0.75rem 1.5rem;
   background: #10b981;
-  color: white;
+
   border: none;
   border-radius: 4px;
   font-weight: 500;
@@ -416,7 +433,7 @@ onMounted(() => {
 .question-section h3,
 .files-section h3,
 .draft-section h3 {
-  color: white;
+
   margin-bottom: 1rem;
 }
 
@@ -427,7 +444,7 @@ onMounted(() => {
 }
 
 .form-group label {
-  color: white;
+
   font-weight: 500;
 }
 
@@ -436,14 +453,14 @@ onMounted(() => {
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.1);
-  color: white;
+
   font-size: 1rem;
   resize: vertical;
   font-family: inherit;
 }
 
 .question-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--cool-gray);;
 }
 
 .files-grid {
@@ -461,6 +478,8 @@ onMounted(() => {
   cursor: pointer;
   transition: all 0.2s ease;
 }
+
+
 
 .file-card:hover {
   border-color: rgba(255, 255, 255, 0.4);
@@ -480,7 +499,6 @@ onMounted(() => {
 }
 
 .file-header h4 {
-  color: white;
   margin: 0;
   font-size: 1rem;
 }
@@ -501,13 +519,14 @@ onMounted(() => {
 }
 
 .file-preview {
-  color: rgba(255, 255, 255, 0.7);
   font-size: 0.875rem;
+  word-break: break-word;
+white-space: normal;
+overflow: hidden;
   line-height: 1.4;
 }
 
 .files-info {
-  color: rgba(255, 255, 255, 0.8);
   font-size: 0.875rem;
   margin: 0;
 }
@@ -515,7 +534,6 @@ onMounted(() => {
 .generate-btn {
   padding: 1rem 2rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
@@ -530,7 +548,8 @@ onMounted(() => {
 }
 
 .generate-btn:disabled {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--raspberry-rose);
+  opacity: 0.5;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
@@ -544,7 +563,6 @@ onMounted(() => {
 }
 
 .draft-header h3 {
-  color: white;
   margin: 0;
 }
 
@@ -557,7 +575,6 @@ onMounted(() => {
 .accept-btn {
   padding: 0.5rem 1rem;
   background: #10b981;
-  color: white;
   border: none;
   border-radius: 4px;
   font-weight: 500;
@@ -586,10 +603,9 @@ onMounted(() => {
 .draft-textarea {
   width: 100%;
   padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--orange-honey);
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.1);
-  color: white;
   font-size: 1rem;
   font-family: inherit;
   line-height: 1.6;
@@ -597,11 +613,9 @@ onMounted(() => {
 }
 
 .draft-textarea::placeholder {
-  color: rgba(255, 255, 255, 0.6);
 }
 
 .feedback-section h4 {
-  color: white;
   margin-bottom: 1rem;
 }
 
@@ -623,14 +637,12 @@ onMounted(() => {
 }
 
 .feedback-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
 }
 
 .feedback-btn {
   align-self: flex-start;
   padding: 0.75rem 1.5rem;
   background: #f59e0b;
-  color: white;
   border: none;
   border-radius: 4px;
   font-weight: 500;
@@ -652,7 +664,6 @@ onMounted(() => {
 }
 
 .feedback-history h5 {
-  color: white;
   margin-bottom: 1rem;
 }
 
@@ -672,13 +683,11 @@ onMounted(() => {
 }
 
 .feedback-text {
-  color: rgba(255, 255, 255, 0.9);
   flex: 1;
 }
 
 .loading {
   text-align: center;
-  color: white;
   padding: 2rem;
 }
 
@@ -722,7 +731,6 @@ onMounted(() => {
 .empty-files,
 .not-authenticated {
   text-align: center;
-  color: rgba(255, 255, 255, 0.7);
   padding: 3rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;

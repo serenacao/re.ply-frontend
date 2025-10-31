@@ -13,10 +13,6 @@ export interface EditRequest {
   newDraft: string
 }
 
-export interface AcceptRequest {
-  // Empty request body
-}
-
 export interface FeedbackRequest {
   comment: string
 }

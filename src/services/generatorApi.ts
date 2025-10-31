@@ -2,7 +2,6 @@ import type {
   GenerateRequest, 
   GenerateResponse,
   EditRequest,
-  AcceptRequest,
   FeedbackRequest,
   FeedbackResponse,
   ApiResponse 
@@ -40,15 +39,14 @@ class GeneratorApi {
   }
 
   async generate(request: GenerateRequest): Promise<ApiResponse<GenerateResponse>> {
+    console.log('request', request)
+    console.log('request question', request.question)
+    console.log('request files,', request.files)
     return this.makeRequest('/api/Generator/generate', 'POST', request)
   }
 
   async edit(request: EditRequest): Promise<ApiResponse<{}>> {
     return this.makeRequest('/api/Generator/edit', 'POST', request)
-  }
-
-  async accept(request: AcceptRequest): Promise<ApiResponse<{}>> {
-    return this.makeRequest('/api/Generator/accept', 'POST', request)
   }
 
   async feedback(request: FeedbackRequest): Promise<ApiResponse<FeedbackResponse>> {
