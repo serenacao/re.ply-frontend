@@ -42,7 +42,7 @@ const handleLogout = () => {
 
 <style>
 #app {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: "Verdana", "Helvetica", "Arial", sans-serif;
   min-height: 100vh;
   background: linear-gradient(135deg, var(--antiflash-white) , var(--tea-green) 100%);
 }

@@ -362,15 +362,20 @@ onMounted(() => {
 .header {
   text-align: center;
   margin-bottom: 2rem;
+  font-weight: 200;
 }
 
 .header h1 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
+  font-family: "Georgia", serif;
+  font-weight: 400;
+  background: #ED6B8650;
 }
 
 .header p {
   font-size: 1.1rem;
+  color: #3f4334ff
 }
 
 .user-section {
@@ -389,7 +394,7 @@ onMounted(() => {
 }
 
 .user-info h3 {
-
+  font-weight: 300;
   margin: 0;
   font-size: 1.2rem;
 }

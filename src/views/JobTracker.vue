@@ -205,6 +205,11 @@ onMounted(loadJobs)
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+.job-tracker h2 {
+  font-weight: 400;
+  font-family: "Georgia", serif;
+}
+
 .job-form {
   display: flex;
   gap: 1rem;

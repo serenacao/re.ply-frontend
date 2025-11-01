@@ -272,13 +272,16 @@ onMounted(() => {
 }
 
 .header h1 {
-  color: white;
+  background: #ED6B8650;
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
+  color: var(--space-cadet);
+  font-weight: 400;
+  font-family: "Georgia", serif;
 }
 
+
 .header p {
-  color: rgba(255, 255, 255, 0.8);
   font-size: 1.1rem;
 }
 
@@ -298,8 +301,8 @@ onMounted(() => {
 }
 
 .user-info h3 {
-  color: white;
   margin: 0;
+  font-weight: 300;
   font-size: 1.2rem;
 }
 
@@ -315,11 +318,11 @@ onMounted(() => {
 }
 
 .load-btn:hover:not(:disabled) {
-  background: #059669;
+  background: #045d41ff;
 }
 
 .load-btn:disabled {
-  background: rgba(255, 255, 255, 0.2);
+  background: #10b981;
   cursor: not-allowed;
 }
 
@@ -331,7 +334,7 @@ onMounted(() => {
 }
 
 .upload-section h3 {
-  color: white;
+  font-weight: 400;
   margin-bottom: 1rem;
 }
 
@@ -348,7 +351,6 @@ onMounted(() => {
 }
 
 .form-group label {
-  color: white;
   font-weight: 500;
 }
 
@@ -358,7 +360,6 @@ onMounted(() => {
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.1);
-  color: white;
   font-size: 1rem;
   resize: vertical;
 }
@@ -369,13 +370,12 @@ onMounted(() => {
 
 .file-input::placeholder,
 .content-textarea::placeholder {
-  color: rgba(255, 255, 255, 0.6);
 }
 
 .upload-btn {
   align-self: flex-start;
   padding: 0.75rem 1.5rem;
-  background: #3b82f6;
+  background: #10b981;
   color: white;
   border: none;
   border-radius: 4px;
@@ -384,18 +384,18 @@ onMounted(() => {
   transition: background-color 0.2s;
 }
 
-.upload-btn:hover:not(:disabled) {
-  background: #2563eb;
+.upload-btn:disabled {
+  background: #10b981;
+  cursor: not-allowed;
 }
 
-.upload-btn:disabled {
-  background: rgba(255, 255, 255, 0.2);
-  cursor: not-allowed;
+.upload-btn:hover:not(:disabled) {
+  background: #0e6046ff;
 }
 
 .loading {
   text-align: center;
-  color: white;
+  color: rgba(166, 211, 155, 1);
   padding: 2rem;
 }
 
@@ -437,7 +437,7 @@ onMounted(() => {
 }
 
 .files-section h3 {
-  color: white;
+  color: var(--raspberry-rose);
   margin-bottom: 1rem;
 }
 
@@ -463,7 +463,6 @@ onMounted(() => {
 }
 
 .file-header h4 {
-  color: white;
   margin: 0;
   word-break: break-all;
 }
