@@ -379,10 +379,12 @@ onMounted(() => {
 }
 
 .user-section {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 2rem;
+  border-width: 10px;
+  border-color: white;
 }
 
 .user-info {
@@ -492,8 +494,8 @@ onMounted(() => {
 }
 
 .file-card.selected {
-  border-color: #3b82f6;
-  background: rgba(59, 130, 246, 0.1);
+  border-color: #f63b70ff;
+  background: rgba(246, 59, 187, 0.1);
 }
 
 .file-header {
@@ -519,7 +521,7 @@ onMounted(() => {
 }
 
 .selection-indicator .selected {
-  color: #3b82f6;
+  color: #f63b70ff;
   font-weight: bold;
 }
 
@@ -538,7 +540,7 @@ overflow: hidden;
 
 .generate-btn {
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--raspberry-rose) 0%, var(--tea-green) 100%);
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
@@ -746,7 +748,7 @@ overflow: hidden;
   display: inline-block;
   margin-top: 1rem;
   padding: 0.75rem 1.5rem;
-  background: #3b82f6;
+  background: #f63b89ff;
   color: white;
   text-decoration: none;
   border-radius: 4px;
@@ -754,14 +756,14 @@ overflow: hidden;
 }
 
 .link-to-filestorage:hover {
-  background: #2563eb;
+  background: #eb2599ff;
 }
 
 .login-link {
   display: inline-block;
   margin-top: 1rem;
   padding: 0.75rem 1.5rem;
-  background: #3b82f6;
+  background: #f63b9fff;
   color: white;
   text-decoration: none;
   border-radius: 4px;
@@ -770,7 +772,7 @@ overflow: hidden;
 }
 
 .login-link:hover {
-  background: #2563eb;
+  background: #eb2599ff;
 }
 
 @media (max-width: 768px) {
