@@ -19,7 +19,6 @@ export interface RegisterResponse {
 }
 
 export interface LoginResponse {
-<<<<<<< HEAD
   token: string 
 }
 
@@ -29,9 +28,6 @@ export interface VerifyTokenRequest {
 
 export interface VerifyTokenResponse {
   userId: string
-=======
-  user: User 
->>>>>>> 476b389ac99b9569e494840ca70e14c42779d987
 }
 
 export interface ApiResponse<T> {
