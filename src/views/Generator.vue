@@ -432,7 +432,6 @@ onMounted(() => {
 .question-section,
 .files-section,
 .generation-section,
-
 .feedback-section {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
